@@ -40,9 +40,11 @@ function App() {
             }
         })
       })
+      setRoll(roll=>roll+1)
     } else {
       setTenzies(!tenzies)
       setDiceValue(allNewDice())
+      setRoll(0)
     }
     
   }
@@ -62,6 +64,8 @@ function App() {
 
   const diceElements = diceValue.map(item => <Dice key={item.id} value={item.value} isHeld={item.isHeld} handleClick ={()=>holdDice(item.id)}/>)
 
+  const [roll,setRoll]=React.useState(0)
+
   return (
     <main className='main'>
       {tenzies && <Confetti width='360px' height='380px'/>}
@@ -72,6 +76,7 @@ function App() {
                 {diceElements} 
             </div>
             <button onClick={reRoll}>{tenzies === true ? 'New Game' : 'Roll'}</button>
+            <p className='roll-time'>Time(s): {roll}</p>
             
         
         </div>
